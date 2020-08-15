@@ -9,8 +9,6 @@ namespace WerehouseOrders.Models.View.Orders
     {
         public int Id { get; set; }
 
-        public string ProductName { get; set; }
-
         public string OrderReference { get; set; }
 
         public string OrderedProducts { get; set; }

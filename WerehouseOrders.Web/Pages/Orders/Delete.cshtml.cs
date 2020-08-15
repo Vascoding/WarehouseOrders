@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using WerehouseOrders.Models.Data.Orders;
 using WerehouseOrders.Services.Contracts;
 using WerehouseOrders.Web.Pages.Abstractions.Orders;
@@ -17,7 +16,6 @@ namespace WerehouseOrders.Web.Pages.Orders
             var order = await this.entityService.GetBy<Order>(o => o.Id == id);
 
             this.Id = order.Id;
-            this.ProductName = order.ProductName;
             this.Comment = order.Comment;
             this.CustomerName = order.CustomerName;
             this.CustormerPhoneNumber = order.CustormerPhoneNumber;

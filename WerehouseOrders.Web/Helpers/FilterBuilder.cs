@@ -21,7 +21,7 @@ namespace WerehouseOrders.Web.Helpers
                 { "From", new Func<ParameterExpression, Expression>(this.FromFilter) },
                 { "To", new Func<ParameterExpression, Expression>(this.ToFilter) },
                 { "Author", new Func<ParameterExpression, Expression>(this.AuthorFilter) },
-                { "ProductName", new Func<ParameterExpression, Expression>(this.ProductNameFilter) },
+                { "OrderedProducts", new Func<ParameterExpression, Expression>(this.OrderedProductsFilter) },
                 { "Comment", new Func<ParameterExpression, Expression>(this.CommentFilter) },
                 { "PhoneNumber", new Func<ParameterExpression, Expression>(this.PhoneNumberFilter) },
                 { "CustomerName", new Func<ParameterExpression, Expression>(this.CustomerNameFilter) }
@@ -58,8 +58,8 @@ namespace WerehouseOrders.Web.Helpers
         private Expression AuthorFilter(ParameterExpression parameter) =>
             ExpressionBuilder.Equal(parameter, "Author", this.filter.Author);
 
-        private Expression ProductNameFilter(ParameterExpression parameter) =>
-            ExpressionBuilder.CaseInsensitiveCompare(parameter, "ProductName", this.filter.ProductName);
+        private Expression OrderedProductsFilter(ParameterExpression parameter) =>
+            ExpressionBuilder.CaseInsensitiveCompare(parameter, "OrderedProducts", this.filter.OrderedProducts);
 
         private Expression CommentFilter(ParameterExpression parameter) =>
             ExpressionBuilder.CaseInsensitiveCompare(parameter, "Comment", this.filter.Comment);

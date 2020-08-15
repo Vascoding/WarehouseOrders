@@ -15,7 +15,7 @@ namespace WerehouseOrders.Models.View.Filter
 
         public string Author { get; set; }
 
-        public string ProductName { get; set; }
+        public string OrderedProducts { get; set; }
 
         public string Comment { get; set; }
 
