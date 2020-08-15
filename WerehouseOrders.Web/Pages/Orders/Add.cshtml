@@ -1,0 +1,89 @@
+﻿@page
+@model AddModel
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h2 style="text-align:center">Създаване на поръчка</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <section>
+                <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                    <h4>@TempData["ErrorMessage"]</h4>
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="OrderReference">Референция на поръчка</label>
+                        <input asp-for="OrderReference" class="form-control" />
+                        <span asp-validation-for="OrderReference" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrderedProducts">Поръчани продукти</label>
+                        <input asp-for="OrderedProducts" class="form-control" />
+                        <span asp-validation-for="OrderedProducts" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ProductsReferences">Каталожни номера</label>
+                        <input asp-for="ProductsReferences" class="form-control" />
+                        <span asp-validation-for="ProductsReferences" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="UnitPrices">Ед. цена</label>
+                        <input asp-for="UnitPrices" class="form-control" />
+                        <span asp-validation-for="UnitPrices" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="StockQuantities">Наличност</label>
+                        <input asp-for="StockQuantities" class="form-control" />
+                        <span asp-validation-for="StockQuantities" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustomerName">Име на клиент</label>
+                        <input asp-for="CustomerName" class="form-control" />
+                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CustormerPhoneNumber">Телефон</label>
+                        <input asp-for="CustormerPhoneNumber" class="form-control" />
+                        <span asp-validation-for="CustormerPhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TotalAmount">Обща сума на поръчката</label>
+                        <input asp-for="TotalAmount" type="number" step=any value="0.00" class="form-control" />
+                        <span asp-validation-for="TotalAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="DeliverySlip">Товарителница</label>
+                        <textarea asp-for="DeliverySlip" class="form-control"></textarea>
+                        <span asp-validation-for="DeliverySlip" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Comment">Коментар</label>
+                        <textarea asp-for="Comment" class="form-control"></textarea>
+                        <span asp-validation-for="Comment" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Status">Статус</label>
+                        <select class="form-control" name="Status">
+                            <option class="bg-warning" value="@Status.Waiting">Чакаща</option>
+                            <option class="bg-info" value="@Status.Stated">Заявена стока</option>
+                            <option class="bg-success" value="@Status.Completed">Потготвена</option>
+                            <option class="bg-danger" value="@Status.Refused">Отказана</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Създай поръчка</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

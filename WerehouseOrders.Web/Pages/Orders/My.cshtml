@@ -1,0 +1,165 @@
+﻿@page
+@model MyModel
+@{
+    ViewData["Title"] = "Моите поръчки";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>от</th>
+                <th>до</th>
+                <th>по статус</th>
+                <th>по име на продуктите</th>
+                <th>по коменар</th>
+                <th>по име на клиент</th>
+                <th>по телефон</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <input type="date" asp-for="From" value="" class="form-control" />
+                </td>
+                <td>
+                    <input type="date" asp-for="To" value="" class="form-control" />
+                </td>
+                <td>
+                    <select class="form-control" name="Status" style="width:auto">
+                        <option selected>Всички</option>
+                        <option class="bg-warning" value="@Status.Waiting">Чакаща</option>
+                        <option class="bg-info" value="@Status.Stated">Заявена стока</option>
+                        <option class="bg-success" value="@Status.Completed">Потготвена</option>
+                        <option class="bg-danger" value="@Status.Refused">Отказана</option>
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="ProductName" value="" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" name="Comment" value="" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" name="CustomerName" value="" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" name="PhoneNumber" value="" class="form-control" />
+                </td>
+                <td>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Филтрирай</button>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Референция</th>
+            <th>Поръчани продукти</th>
+            <th>Каталожни номера</th>
+            <th>Ед. цена</th>
+            <th>Наличности</th>
+            <th>Име на клиент</th>
+            <th>Телефон</th>
+            <th>Обща сума</th>
+            <th>Дата на изпращане</th>
+            <th>Номер на товарителница</th>
+            <th>Коментар</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in OrdersCache.GetAllByPage(Model.CurrentPage, Model.PageSize))
+        {
+        <form id="statusForm" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            <tr class="@HtmlHeleper.GetClassByStatus(item.Status)">
+                <td>@Html.DisplayFor(modelItem => item.OrderReference)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderedProducts)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductsReferences)</td>
+                <td>@Html.DisplayFor(modelItem => item.UnitPrices)</td>
+                <td>@Html.DisplayFor(modelItem => item.StockQuantities)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustormerPhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.TotalAmount)</td>
+                <td>
+                    @if (item.ShippingDate != null)
+                    {
+                        @item.ShippingDate?.ToString("dd/MM/yyyy");
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <input name="ShippingDate" type="date" class="form-control" />
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.DeliverySlip != null)
+                    {
+                        <a href="@Html.DisplayFor(modelItem => item.DeliverySlip)" target="_blank">Товарителница</a>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <input name="DeliverySlip" class="form-control" />
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.Comment != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <input name="Comment" class="form-control" type="text" />
+                        </div>
+                    }
+                </td>
+                <td class="container-fluid" style="width:240px">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <select name="Status" class="form-group">
+                                <option class="bg-warning" selected="@HtmlHeleper.IsSelected(Status.Waiting, item.Status)" value="@Status.Waiting">Чакаща</option>
+                                <option class="bg-info" selected="@HtmlHeleper.IsSelected(Status.Stated, item.Status)" value="@Status.Stated">Заявена стока</option>
+                                <option class="bg-success" selected="@HtmlHeleper.IsSelected(Status.Completed, item.Status)" value="@Status.Completed">Потготвена</option>
+                                <option class="bg-danger" selected="@HtmlHeleper.IsSelected(Status.Refused, item.Status)" value="@Status.Refused">Отказана</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" asp-route-id="@item.Id" class="btn-sm btn-primary">Промени</button>
+                        </div>
+                        <div class="col-md-4">
+                            <a class="btn-sm btn-success" asp-page="./Edit" asp-route-id="@item.Id">Редакция</a>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        </form>
+        }
+    </tbody>
+</table>
+
+<ul class="pagination">
+    <li class="@(Model.CurrentPage == 1 ? "disabled" : string.Empty)">
+        <a asp-route-currentPage="@Model.PreviousPage" asp-page-handler="PageChange"
+           aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    <li class="@(Model.CurrentPage == Model.TotalPages ? "disabled" : string.Empty)">
+        <a asp-route-currentPage="@Model.NextPage" asp-page-handler="PageChange"
+           aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
