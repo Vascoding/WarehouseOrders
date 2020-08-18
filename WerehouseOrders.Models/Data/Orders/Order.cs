@@ -12,6 +12,8 @@ namespace WerehouseOrders.Models.Data.Orders
 
         public string OrderedProducts { get; set; }
 
+        public string OrderedProductsCount { get; set; }
+
         public string ProductsReferences { get; set; }
 
         public string UnitPrices { get; set; }

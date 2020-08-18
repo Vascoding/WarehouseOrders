@@ -21,6 +21,7 @@ namespace WerehouseOrders.Web.Pages.Orders
             this.OrderedProducts = order.OrderedProducts;
             this.ProductsReferences = order.ProductsReferences;
             this.UnitPrices = order.UnitPrices;
+            this.OrderedProductsCount = order.OrderedProductsCount;
             this.StockQuantities = order.StockQuantities;
             this.CustomerName = order.CustomerName;
             this.CustormerPhoneNumber = order.CustormerPhoneNumber;
@@ -46,6 +47,7 @@ namespace WerehouseOrders.Web.Pages.Orders
             order.OrderedProducts = this.OrderedProducts;
             order.ProductsReferences = this.ProductsReferences;
             order.UnitPrices = this.UnitPrices;
+            order.OrderedProductsCount = this.OrderedProductsCount;
             order.StockQuantities = this.StockQuantities;
             order.CustomerName = this.CustomerName;
             order.CustormerPhoneNumber = this.CustormerPhoneNumber;

@@ -36,6 +36,11 @@
                         <span asp-validation-for="UnitPrices" class="text-danger"></span>
                     </div>
                     <div class="form-group">
+                        <label asp-for="OrderedProductsCount">Количество на продуктите</label>
+                        <input asp-for="OrderedProductsCount" class="form-control" />
+                        <span asp-validation-for="OrderedProductsCount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
                         <label asp-for="StockQuantities">Наличност</label>
                         <input asp-for="StockQuantities" class="form-control" />
                         <span asp-validation-for="StockQuantities" class="text-danger"></span>

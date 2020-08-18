@@ -34,6 +34,7 @@ namespace WerehouseOrders.Web.Pages.Orders
                 OrderedProducts = this.OrderedProducts,
                 ProductsReferences = this.ProductsReferences,
                 UnitPrices = this.UnitPrices,
+                OrderedProductsCount = this.OrderedProductsCount,
                 StockQuantities = this.StockQuantities,
                 CustomerName = this.CustomerName,
                 CustormerPhoneNumber = this.CustormerPhoneNumber,

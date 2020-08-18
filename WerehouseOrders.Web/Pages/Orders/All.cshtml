@@ -74,6 +74,7 @@
             <th>Поръчани продукти</th>
             <th>Каталожни номера</th>
             <th>Ед. цена</th>
+            <th>Количество на продуктите</th>
             <th>Наличности</th>
             <th>Име на клиент</th>
             <th>Телефон</th>
@@ -92,6 +93,7 @@
                     <td>@Html.DisplayFor(modelItem => item.OrderedProducts)</td>
                     <td>@Html.DisplayFor(modelItem => item.ProductsReferences)</td>
                     <td>@Html.DisplayFor(modelItem => item.UnitPrices)</td>
+                    <td>@Html.DisplayFor(modelItem => item.OrderedProductsCount)</td>
                     <td>@Html.DisplayFor(modelItem => item.StockQuantities)</td>
                     <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
                     <td>@Html.DisplayFor(modelItem => item.CustormerPhoneNumber)</td>
@@ -132,9 +134,9 @@
                             </div>
                         }
                     </td>
-                    <td class="container-fluid" style="width:240px">
-                        <div class="row">
-                            <div class="col-md-12">
+                    <td class="container">
+                        <div>
+                            <div>
                                 <select name="Status" class="form-group">
                                     <option class="bg-warning" selected="@HtmlHeleper.IsSelected(Status.Waiting, item.Status)" value="@Status.Waiting">Чакаща</option>
                                     <option class="bg-info" selected="@HtmlHeleper.IsSelected(Status.Stated, item.Status)" value="@Status.Stated">Заявена стока</option>
@@ -142,11 +144,9 @@
                                     <option class="bg-danger" selected="@HtmlHeleper.IsSelected(Status.Refused, item.Status)" value="@Status.Refused">Отказана</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <button type="submit" asp-route-id="@item.Id" class="btn-sm btn-primary">Промени</button>
-                            </div>
-                            <div class="col-md-4">
-                                <a class="btn-sm btn-success" asp-page="./Edit" asp-route-id="@item.Id">Редакция</a>
+                            <div style="display: flex;">
+                                <button style="margin: 2px;" type="submit" asp-route-id="@item.Id" class="btn btn-primary">Промени</button>
+                                <a style="margin: 2px;" class="btn btn-success" asp-page="./Edit" asp-route-id="@item.Id">Редакция</a>
                             </div>
                         </div>
                     </td>

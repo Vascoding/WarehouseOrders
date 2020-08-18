@@ -27,6 +27,8 @@ namespace WerehouseOrders.Web.Pages.Abstractions.Orders
 
         public string UnitPrices { get; set; }
 
+        public string OrderedProductsCount { get; set; }
+
         public string StockQuantities { get; set; }
 
         public string CustomerName { get; set; }
