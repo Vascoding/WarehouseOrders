@@ -35,7 +35,7 @@ namespace WerehouseOrders.Web.Pages.Abstractions.Orders
 
         public string CustormerPhoneNumber { get; set; }
 
-        public decimal TotalAmount { get; set; }
+        public string TotalAmount { get; set; }
 
         public DateTime? ShippingDate { get; set; }
 

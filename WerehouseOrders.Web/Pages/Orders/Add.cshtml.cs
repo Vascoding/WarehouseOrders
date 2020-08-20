@@ -28,6 +28,8 @@ namespace WerehouseOrders.Web.Pages.Orders
 
             var user = await this.entityService.GetBy<User>(u => u.Name == this.User.Identity.Name);
 
+            decimal.TryParse(this.TotalAmount.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal totalAmount);
+
             var model = new Order
             {
                 OrderReference = this.OrderReference,
@@ -38,7 +40,7 @@ namespace WerehouseOrders.Web.Pages.Orders
                 StockQuantities = this.StockQuantities,
                 CustomerName = this.CustomerName,
                 CustormerPhoneNumber = this.CustormerPhoneNumber,
-                TotalAmount = this.TotalAmount,
+                TotalAmount = totalAmount,
                 DeliverySlip = this.DeliverySlip,
                 Comment = this.Comment,
                 UserId = user.Id,

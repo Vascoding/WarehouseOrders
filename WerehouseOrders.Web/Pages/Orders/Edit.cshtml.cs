@@ -25,7 +25,7 @@ namespace WerehouseOrders.Web.Pages.Orders
             this.StockQuantities = order.StockQuantities;
             this.CustomerName = order.CustomerName;
             this.CustormerPhoneNumber = order.CustormerPhoneNumber;
-            this.TotalAmount = order.TotalAmount;
+            this.TotalAmount = order.TotalAmount.ToString(CultureInfo.InvariantCulture);
             this.DeliverySlip = order.DeliverySlip;
             this.Comment = order.Comment;
             this.Status = order.Status;
@@ -43,6 +43,8 @@ namespace WerehouseOrders.Web.Pages.Orders
 
             var order = await this.entityService.GetBy<Order>(o => o.Id == this.Id);
 
+            decimal.TryParse(this.TotalAmount.Replace(',', '.'), NumberStyles.Any, CultureInfo.InvariantCulture, out decimal totalAmount);
+
             order.OrderReference = this.OrderReference;
             order.OrderedProducts = this.OrderedProducts;
             order.ProductsReferences = this.ProductsReferences;
@@ -51,7 +53,7 @@ namespace WerehouseOrders.Web.Pages.Orders
             order.StockQuantities = this.StockQuantities;
             order.CustomerName = this.CustomerName;
             order.CustormerPhoneNumber = this.CustormerPhoneNumber;
-            order.TotalAmount = this.TotalAmount;
+            order.TotalAmount = totalAmount;
             order.DeliverySlip = this.DeliverySlip;
             order.Comment = this.Comment;
             order.Status = this.Status;
