@@ -30,6 +30,7 @@
     width: 100%;
     background-color: #555;
     overflow: auto;
+
 }
 
     .icon-bar a {
@@ -40,16 +41,22 @@
         transition: all 0.3s ease;
         color: white;
         font-size: 146px;
+
+        
     }
     .icon-bar span {
-        font-size: 12px;
-        padding-left:10px;
+        font-size: 11px;
+        padding-left:5px;
+        padding-bottom:20px;
    
     }
 
-        .icon-bar a:hover {
-            background-color: #000;
-        }
+    .icon-bar a:hover 
+    {
+        background-color: #000;
+        text-decoration: unset;
+    }
+
 
 .allorders {
     background-color: #9b77a3;
