@@ -1,19 +1,11 @@
 ﻿@page
 @model IndexModel
 @{
-    int countwaitng = 0;
-    int countstated = 0;
-    int countcompleted = 0;
-    int countforprint = 0;
-    int countall = 0;
-    @foreach (var item in OrdersCache.GetAllByPage(Model.CurrentPage, Model.PageSize))
-    {
-        countwaitng = OrdersCache.Items.Where(r => r.Status == 0).Count();
-        countstated = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)1).Count();
-        countcompleted = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)2 && r.ShippingDate==DateTime.Today).Count();
-        countforprint = OrdersCache.Items.Where(r => r.Status != (Models.Enums.Status?)2 && r.DeliverySlip!=null).Count();
-        countall = OrdersCache.Items.Count();
-    }
+   var countwaitng = OrdersCache.Items.Where(r => r.Status == 0).Count();
+   var countstated = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)1).Count();
+   var countcompleted = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)2 && r.ShippingDate==DateTime.Today).Count();
+   var countforprint = OrdersCache.Items.Where(r => r.Status != (Models.Enums.Status?)2 && r.DeliverySlip!=null).Count();
+   var countall = OrdersCache.Items.Count();
     ViewData["Title"] = "Home page";
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
