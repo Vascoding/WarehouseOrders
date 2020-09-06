@@ -5,19 +5,21 @@
     int countstated = 0;
     int countcompleted = 0;
     int countforprint = 0;
+    int countall = 0;
     @foreach (var item in OrdersCache.GetAllByPage(Model.CurrentPage, Model.PageSize))
     {
         countwaitng = OrdersCache.Items.Where(r => r.Status == 0).Count();
         countstated = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)1).Count();
         countcompleted = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)2 && r.ShippingDate==DateTime.Today).Count();
         countforprint = OrdersCache.Items.Where(r => r.Status != (Models.Enums.Status?)2 && r.DeliverySlip!=null).Count();
+        countall = OrdersCache.Items.Count();
     }
     ViewData["Title"] = "Home page";
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div class="icon-bar">
-    <a class="allorders" href="/Orders/All"><i class="fa fa-list"></i><span>Всички поръчки</span></a>
-    <div><a class="waitngs" href="/Orders/Waitings"><i class="fa fa-warning"></i><span>Чакащи</span><cite style="font-size:50px">@countwaitng</cite></a></div>
+    <a class="allorders" href="/Orders/All"><i class="fa fa-list"></i><span>Всички<cite style="font-size:50px">@countall</cite></span></a>
+    <a class="waitngs" href="/Orders/Waitings"><i class="fa fa-warning"></i><span>Чакащи<cite style="font-size:50px">@countwaitng</cite></span></a>
     <a class="stated" href="/Orders/Stated"><i class="fa fa-edit"></i><span>Заявeни<cite style="font-size:50px">@countstated</cite></span></a>
     <a class="forprint" href="/Orders/ForPrint"><i class="fa fa-print"></i><span>За принт<cite style="font-size:50px">@countforprint</cite></span></a>
     <a class="completed" href="/Orders/Completed"><i class="fa fa-check-circle"></i><span>Подготвени <cite style="font-size:50px">@countcompleted</cite></span></a>
