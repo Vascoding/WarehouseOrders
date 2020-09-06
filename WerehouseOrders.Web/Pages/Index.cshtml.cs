@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using WerehouseOrders.Services.Contracts;
+using WerehouseOrders.Web.Pages.Abstractions.Orders;
 
 namespace WerehouseOrders.Web.Pages
 {
-    public class IndexModel : PageModel
+    public class IndexModel : ListingOrderModel
     {
-        public void OnGet() { }
+        public IndexModel (IEntityService entityService, IMappingService mapper)
+    : base(entityService, mapper) { }
     }
 }

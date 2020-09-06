@@ -22,5 +22,7 @@ namespace WerehouseOrders.Models.View.Filter
         public string PhoneNumber { get; set; }
 
         public string CustomerName { get; set; }
+
+        public string DeliverySlip { get; set; }
     }
 }

@@ -24,7 +24,8 @@ namespace WerehouseOrders.Web.Helpers
                 { "OrderedProducts", new Func<ParameterExpression, Expression>(this.OrderedProductsFilter) },
                 { "Comment", new Func<ParameterExpression, Expression>(this.CommentFilter) },
                 { "PhoneNumber", new Func<ParameterExpression, Expression>(this.PhoneNumberFilter) },
-                { "CustomerName", new Func<ParameterExpression, Expression>(this.CustomerNameFilter) }
+                { "CustomerName", new Func<ParameterExpression, Expression>(this.CustomerNameFilter) },
+                { "DeliverySlip", new Func<ParameterExpression, Expression>(this.DeliverySlipFilter) }
             };
         }
 
@@ -69,5 +70,8 @@ namespace WerehouseOrders.Web.Helpers
 
         private Expression CustomerNameFilter(ParameterExpression parameter) =>
             ExpressionBuilder.CaseInsensitiveCompare(parameter, "CustomerName", filter.CustomerName);
+
+        private Expression DeliverySlipFilter(ParameterExpression parameter) =>
+           ExpressionBuilder.CaseInsensitiveCompare(parameter, "DeliverySlip", filter.DeliverySlip);
     }
 }

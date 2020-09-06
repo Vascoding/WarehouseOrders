@@ -1,8 +1,11 @@
 ﻿@page
-@model AllModel
-@{ ViewData["Title"] = "Всички поръчки"; }
+@model StatedModel
+@{
+    ViewData["Title"] = "Моите поръчки";
+}
 
 <h2>@ViewData["Title"]</h2>
+
 <form>
     <table class="table">
         <thead>
@@ -10,7 +13,6 @@
                 <th>от</th>
                 <th>до</th>
                 <th>по статус</th>
-                <th>по автор</th>
                 <th>по име на продуктите</th>
                 <th>по коменар</th>
                 <th>по име на клиент</th>
@@ -35,14 +37,6 @@
                     </select>
                 </td>
                 <td>
-                    <select class="form-control" name="Author" style="width:auto">
-                        <option selected></option>
-                        @foreach (var name in UsersCache.Items)
-                        {
-            <option value="@name">@name</option>}
-                    </select>
-                </td>
-                <td>
                     <input type="text" name="OrderedProducts" value="" class="form-control" />
                 </td>
                 <td>
@@ -64,6 +58,7 @@
     </table>
 </form>
 
+
 <table class="table">
     <thead>
         <tr>
@@ -84,67 +79,73 @@
     <tbody>
         @foreach (var item in OrdersCache.GetAllByPage(Model.CurrentPage, Model.PageSize))
         {
-   
         <form id="statusForm" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-        <tr class="@HtmlHeleper.GetClassByStatus(item.Status)">
-        <td>@Html.DisplayFor(modelItem => item.OrderReference)</td>
-        <td style="width:100%">@Html.DisplayFor(modelItem => item.OrderedProducts)</td>
-        <td>@Html.DisplayFor(modelItem => item.ProductsReferences)</td>
-        <td>@Html.DisplayFor(modelItem => item.UnitPrices)</td>
-        <td>@Html.DisplayFor(modelItem => item.OrderedProductsCount)</td>
-        <td>@Html.DisplayFor(modelItem => item.StockQuantities)</td>
-        <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
-        <td>@Html.DisplayFor(modelItem => item.CustormerPhoneNumber)</td>
-        <td>@Html.DisplayFor(modelItem => item.TotalAmount)</td>
-        <td>
-            @if (item.ShippingDate != null)
-            {
-@item.ShippingDate?.ToString("dd/MM/yyyy");
-}
-else
-{
-<div class="form-group">
-    <input name="ShippingDate" type="date" class="form-control" />
-</div>}
-        </td>
-        <td>
-            @if (item.DeliverySlip != null)
-            {
-<a href="@Html.DisplayFor(modelItem => item.DeliverySlip)" target="_blank">Товарителница</a> }
-                else
-                {
-<div class="form-group">
-    <input name="DeliverySlip" class="form-control" />
-</div>}
-        </td>
-        <td>
-            @if (item.Comment != null)
-            {
-@Html.DisplayFor(modelItem => item.Comment) }
-                else
-                {
-<div class="form-group">
-    <input name="Comment" class="form-control" type="text" />
-</div>}
-        </td>
-        <td class="container">
-            <div>
-                <div>
-                    <select name="Status" class="form-group">
-                        <option class="bg-warning" selected="@HtmlHeleper.IsSelected(Status.Waiting, item.Status)" value="@Status.Waiting">Чакаща</option>
-                        <option class="bg-info" selected="@HtmlHeleper.IsSelected(Status.Stated, item.Status)" value="@Status.Stated">Заявена стока</option>
-                        <option class="bg-success" selected="@HtmlHeleper.IsSelected(Status.Completed, item.Status)" value="@Status.Completed">Потготвена</option>
-                        <option class="bg-danger" selected="@HtmlHeleper.IsSelected(Status.Refused, item.Status)" value="@Status.Refused">Отказана</option>
-                    </select>
-                </div>
-                <div style="display: flex;">
-                    <button style="margin: 2px;" type="submit" asp-route-id="@item.Id" class="btn btn-primary">Промени</button>
-                    <a style="margin: 2px;" class="btn btn-success" asp-page="./Edit" asp-route-id="@item.Id">Редакция</a>
-                </div>
-            </div>
-        </td>
-    </tr>
-</form>}
+            <tr class="@HtmlHeleper.GetClassByStatus(item.Status)">
+                <td>@Html.DisplayFor(modelItem => item.OrderReference)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderedProducts)</td>
+                <td>@Html.DisplayFor(modelItem => item.ProductsReferences)</td>
+                <td>@Html.DisplayFor(modelItem => item.UnitPrices)</td>
+                <td>@Html.DisplayFor(modelItem => item.OrderedProductsCount)</td>
+                <td>@Html.DisplayFor(modelItem => item.StockQuantities)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                <td>@Html.DisplayFor(modelItem => item.CustormerPhoneNumber)</td>
+                <td>@Html.DisplayFor(modelItem => item.TotalAmount)</td>
+                <td>
+                    @if (item.ShippingDate != null)
+                    {
+                        @item.ShippingDate?.ToString("dd/MM/yyyy");
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <input name="ShippingDate" type="date" class="form-control" />
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.DeliverySlip != null)
+                    {
+                        <a href="@Html.DisplayFor(modelItem => item.DeliverySlip)" target="_blank">Товарителница</a>
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <input name="DeliverySlip" class="form-control" />
+                        </div>
+                    }
+                </td>
+                <td>
+                    @if (item.Comment != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    }
+                    else
+                    {
+                        <div class="form-group">
+                            <input name="Comment" class="form-control" type="text" />
+                        </div>
+                    }
+                </td>
+                <td>
+                    <div>
+                        <div>
+                            <select name="Status" class="form-group">
+                                <option class="bg-warning" selected="@HtmlHeleper.IsSelected(Status.Waiting, item.Status)" value="@Status.Waiting">Чакаща</option>
+                                <option class="bg-info" selected="@HtmlHeleper.IsSelected(Status.Stated, item.Status)" value="@Status.Stated">Заявена стока</option>
+                                <option class="bg-success" selected="@HtmlHeleper.IsSelected(Status.Completed, item.Status)" value="@Status.Completed">Потготвена</option>
+                                <option class="bg-danger" selected="@HtmlHeleper.IsSelected(Status.Refused, item.Status)" value="@Status.Refused">Отказана</option>
+                            </select>
+                        </div>
+                        <div style="display: flex;">
+                            <button style="margin: 2px;" type="submit" asp-route-id="@item.Id" class="btn btn-primary">Промени</button>
+                            <a style="margin: 2px;" class="btn btn-success" asp-page="./Edit" asp-route-id="@item.Id">Редакция</a>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        </form>
+        }
     </tbody>
 </table>
 

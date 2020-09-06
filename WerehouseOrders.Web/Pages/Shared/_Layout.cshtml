@@ -8,55 +8,45 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/sasho.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/sasho.css" asp-append-version="true" />
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-page="/Index" class="navbar-brand">WerehouseOrders</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-page="/Orders/All">Всички поръчки</a></li>
-                    @if (Model.HttpContext.User.Identity.IsAuthenticated)
-                    {
-                        <li><a asp-page="/Orders/My">Моите поръчки</a></li>
-                    }
-                    <li><a asp-page="/Orders/Add">Добави поръчка</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    @if (Model.HttpContext.User.Identity.IsAuthenticated)
-                    {
-                        <li><a asp-page="/Login" asp-page-handler="Logout">Изход</a></li>
-                    }
-                    else
-                    {
-                        <li><a asp-page="/Register">Регистрация</a></li>
-                        <li><a asp-page="/Login">Вход</a></li>
-                    }
-                </ul>
-            </div>
+    <div class="topnav">
+        <div style="padding-left:75px">
+            <a asp-page="/Index">Табло</a>
+            <a asp-page="/Orders/All">Всички поръчки</a>
+            <a asp-page="/Orders/Waitings">Чакащи</a>
+            <a asp-page="/Orders/Stated">Заявени</a>
+            <a asp-page="/Orders/Completed">Подготвени</a>
+            <a asp-page="/Orders/ForPrint">За принтиране</a>
+            @if (Model.HttpContext.User.Identity.IsAuthenticated)
+            {
+    <a asp-page="/Orders/My">Моите поръчки</a>}
+            <a asp-page="/Orders/Add">Добави поръчка</a>
+            @if (Model.HttpContext.User.Identity.IsAuthenticated)
+            {
+    <li><a asp-page="/Login" asp-page-handler="Logout">Изход</a></li> }
+                else
+                {
+    <a asp-page="/Register">Регистрация</a>
+                    <a asp-page="/Login">Вход</a>}
         </div>
-    </nav>
+    </div>
+    </div>
 
     <div class="container body-content" style="width:90%">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2020 - OfflineOrderManager</p>
+            <p>&copy; 2020 - BESTAUTO Склад</p>
         </footer>
     </div>
 
