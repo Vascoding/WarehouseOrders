@@ -9,7 +9,7 @@
     {
         countwaitng = OrdersCache.Items.Where(r => r.Status == 0).Count();
         countstated = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)1).Count();
-        countcompleted = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)2).Count();
+        countcompleted = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)2 && r.ShippingDate==DateTime.Today).Count();
         countforprint = OrdersCache.Items.Where(r => r.Status != (Models.Enums.Status?)2 && r.DeliverySlip!=null).Count();
     }
     ViewData["Title"] = "Home page";
