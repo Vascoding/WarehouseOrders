@@ -15,6 +15,7 @@
                 <th>по коменар</th>
                 <th>по име на клиент</th>
                 <th>по телефон</th>
+                <th>по референция</th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +40,8 @@
                         <option selected></option>
                         @foreach (var name in UsersCache.Items)
                         {
-            <option value="@name">@name</option>}
+                            <option value="@name">@name</option>
+                        }
                     </select>
                 </td>
                 <td>
@@ -53,6 +55,9 @@
                 </td>
                 <td>
                     <input type="text" name="PhoneNumber" value="" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" name="OrderReference" value="" class="form-control" />
                 </td>
                 <td>
                     <div class="form-group">
@@ -99,13 +104,14 @@
         <td>
             @if (item.ShippingDate != null)
             {
-@item.ShippingDate?.ToString("dd/MM/yyyy");
-}
-else
-{
-<div class="form-group">
-    <input name="ShippingDate" type="date" class="form-control" />
-</div>}
+                @item.ShippingDate?.ToString("dd/MM/yyyy");
+            }
+            else
+            {
+                <div class="form-group">
+                    <input name="ShippingDate" type="date" class="form-control" />
+                </div>
+            }
         </td>
         <td>
             @if (item.DeliverySlip != null)

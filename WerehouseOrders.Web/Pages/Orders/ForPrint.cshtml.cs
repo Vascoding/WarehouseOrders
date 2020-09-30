@@ -2,6 +2,7 @@
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WerehouseOrders.Models.Enums;
 using WerehouseOrders.Models.Data.Orders;
 using WerehouseOrders.Models.View.Filter;
 using WerehouseOrders.Models.View.Orders;
@@ -21,9 +22,13 @@ namespace WerehouseOrders.Web.Pages.Orders
         public override async Task OnGet(OrdersFilterModel filter, int currentPage = 1)
         {
             this.CurrentPage = currentPage;
-            var orders = await entityService.GetAll<Order>(e => e.DeliverySlip != null && e.Status != (Models.Enums.Status?)2);
+
+            var filterDelegate = new FilterBuilder(filter).CreateFilterDelegate().Compile();
+
+            var orders = await entityService
+                .GetAll<Order>(e => e.DeliverySlip != null && e.Status != Status.Completed && filterDelegate(e));
+
             OrdersCache.Items = orders.Select(this.mapper.Map<OrderViewModel>).ToList();
- 
         }
     }
 }

@@ -1,9 +1,8 @@
-﻿using System.Linq.Expressions;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using WerehouseOrders.Models.Enums;
 using WerehouseOrders.Models.View.Filter;
 using WerehouseOrders.Services.Contracts;
-using WerehouseOrders.Web.Helpers;
 using WerehouseOrders.Web.Pages.Abstractions.Orders;
 
 namespace WerehouseOrders.Web.Pages.Orders
@@ -16,8 +15,8 @@ namespace WerehouseOrders.Web.Pages.Orders
 
         public override async Task OnGet(OrdersFilterModel filter, int currentPage = 1)
         {
+            filter.Status = Status.Completed;
 
-            filter.Status = (Models.Enums.Status?)2;
             await base.OnGet(filter, currentPage);
         }
     }

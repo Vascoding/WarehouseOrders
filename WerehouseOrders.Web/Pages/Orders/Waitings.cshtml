@@ -12,11 +12,11 @@
             <tr>
                 <th>от</th>
                 <th>до</th>
-                <th>по статус</th>
                 <th>по име на продуктите</th>
                 <th>по коменар</th>
                 <th>по име на клиент</th>
                 <th>по телефон</th>
+                <th>по референция</th>
             </tr>
         </thead>
         <tbody>
@@ -26,15 +26,6 @@
                 </td>
                 <td>
                     <input type="date" asp-for="To" value="" class="form-control" />
-                </td>
-                <td>
-                    <select class="form-control" name="Status" style="width:auto">
-                        <option selected>Всички</option>
-                        <option class="bg-warning" value="@Status.Waiting">Чакаща</option>
-                        <option class="bg-info" value="@Status.Stated">Заявена стока</option>
-                        <option class="bg-success" value="@Status.Completed">Потготвена</option>
-                        <option class="bg-danger" value="@Status.Refused">Отказана</option>
-                    </select>
                 </td>
                 <td>
                     <input type="text" name="OrderedProducts" value="" class="form-control" />
@@ -47,6 +38,9 @@
                 </td>
                 <td>
                     <input type="text" name="PhoneNumber" value="" class="form-control" />
+                </td>
+                <td>
+                    <input type="text" name="OrderReference" value="" class="form-control" />
                 </td>
                 <td>
                     <div class="form-group">

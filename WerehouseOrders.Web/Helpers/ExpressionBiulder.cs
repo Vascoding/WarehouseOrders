@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using System;
 using System.Reflection;
-using Microsoft.EntityFrameworkCore.Internal;
 
 namespace WerehouseOrders.Web.Helpers
 {

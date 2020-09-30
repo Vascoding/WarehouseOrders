@@ -1,7 +1,5 @@
 ﻿using WerehouseOrders.Models.Enums;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WerehouseOrders.Models.View.Filter
 {
@@ -23,6 +21,6 @@ namespace WerehouseOrders.Models.View.Filter
 
         public string CustomerName { get; set; }
 
-        public string DeliverySlip { get; set; }
+        public string OrderReference { get; set; }
     }
 }
