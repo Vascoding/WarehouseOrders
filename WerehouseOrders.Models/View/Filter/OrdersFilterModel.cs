@@ -22,5 +22,7 @@ namespace WerehouseOrders.Models.View.Filter
         public string CustomerName { get; set; }
 
         public string OrderReference { get; set; }
+
+        public string ProductsReferences { get; set; }
     }
 }
