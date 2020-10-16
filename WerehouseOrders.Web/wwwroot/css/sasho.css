@@ -28,7 +28,7 @@
         }
 .icon-bar {
     width: 100%;
-    background-color: #555;
+    background-color: white;
     overflow: auto;
 
 }
@@ -75,4 +75,8 @@
 
 .forprint {
     background-color: #d3835b;
+}
+
+.canceled {
+    background-color: #dc5454;
 }
