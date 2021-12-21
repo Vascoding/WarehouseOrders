@@ -6,6 +6,7 @@
    var countcompleted = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status?)2 && r.ShippingDate==DateTime.Today).Count();
    var countforprint = OrdersCache.Items.Where(r => r.Status != (Models.Enums.Status?)2 && r.DeliverySlip!=null).Count();
    var countcanceled = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status.Refused)).Count();
+   var countplovdiv = OrdersCache.Items.Where(r => r.Status == (Models.Enums.Status.Reserved)).Count();
    var countall = OrdersCache.Items.Count();
     ViewData["Title"] = "Home page";
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +17,7 @@
     <a class="stated" href="/Orders/Stated"><i class="fa fa-edit"></i><span>Заявeни<cite style="font-size:50px">@countstated</cite></span></a>
     <a class="forprint" href="/Orders/ForPrint"><i class="fa fa-print"></i><span>За принт<cite style="font-size:50px">@countforprint</cite></span></a>
     <a class="completed" href="/Orders/Completed"><i class="fa fa-check-circle"></i><span>Подготвени <cite style="font-size:50px">@countcompleted</cite></span></a>
+    <a class="reserved" href="/Orders/Reserved"><i class="fa fa-plane"></i><span>От Пловдив <cite style="font-size:50px">@countplovdiv</cite></span></a>
     <a class="canceled" href="/Orders/Canceled"><i class="fa fa-ban"></i><span>Отказани <cite style="font-size:50px">@countcanceled</cite></span></a>
 </div>
 }
