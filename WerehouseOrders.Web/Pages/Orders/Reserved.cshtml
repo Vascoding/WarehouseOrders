@@ -1,5 +1,5 @@
 ﻿@page
-@model ForPrintModel
+@model ReservedModel
 @{
     ViewData["Title"] = "Моите поръчки";
 }
@@ -73,7 +73,7 @@
     <tbody>
         @foreach (var item in OrdersCache.GetAllByPage(Model.CurrentPage, Model.PageSize))
         {
-        <form id="statusForm" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+            <form id="statusForm" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
             <tr class="@HtmlHeleper.GetClassByStatus(item.Status)">
                 <td>@Html.DisplayFor(modelItem => item.OrderReference)</td>
                 <td>@Html.DisplayFor(modelItem => item.OrderedProducts)</td>
@@ -139,7 +139,7 @@
 
                 </td>
             </tr>
-        </form>
+            </form>
         }
     </tbody>
 </table>

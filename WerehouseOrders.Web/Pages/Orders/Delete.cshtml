@@ -36,11 +36,12 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Status">Статус</label>
-                        <select class="form-control" name="Status" disabled >
+                        <select class="form-control" name="Status" disabled>
                             <option class="bg-warning" selected="@HtmlHeleper.IsSelected(Status.Waiting, Model.Status)" value="@Status.Waiting">Чакаща</option>
                             <option class="bg-info" selected="@HtmlHeleper.IsSelected(Status.Stated, Model.Status)" value="@Status.Stated">Заявена стока</option>
                             <option class="bg-success" selected="@HtmlHeleper.IsSelected(Status.Completed, Model.Status)" value="@Status.Completed">Потготвена</option>
                             <option class="bg-danger" selected="@HtmlHeleper.IsSelected(Status.Refused, Model.Status)" value="@Status.Refused">Отказана</option>
+                            <option class="bg-secondary" selected="@HtmlHeleper.IsSelected(Status.Reserved, Model.Status)" value="@Status.Reserved">Пловдив</option>
                         </select>
                     </div>
                     <div class="form-group">

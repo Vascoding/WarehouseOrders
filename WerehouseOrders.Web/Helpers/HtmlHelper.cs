@@ -15,7 +15,8 @@ namespace WerehouseOrders.Web.Helpers
                 { Status.Waiting, "bg-warning" },
                 { Status.Stated, "bg-info" },
                 { Status.Completed, "bg-success" },
-                { Status.Refused, "bg-danger" }
+                { Status.Refused, "bg-danger" },
+                { Status.Reserved, "bg-secondary" },
             };
 
             return mapStatusToClass[status];

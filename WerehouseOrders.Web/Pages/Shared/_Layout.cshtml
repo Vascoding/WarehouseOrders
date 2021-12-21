@@ -27,17 +27,18 @@
             <a asp-page="/Orders/Stated">Заявени</a>
             <a asp-page="/Orders/Completed">Подготвени</a>
             <a asp-page="/Orders/ForPrint">За принтиране</a>
+            <a asp-page="/Orders/Reserved">За Пловдив</a>
             @if (Model.HttpContext.User.Identity.IsAuthenticated)
             {
-    <a asp-page="/Orders/My">Моите поръчки</a>}
+                <a asp-page="/Orders/My">Моите поръчки</a>}
             <a asp-page="/Orders/Add">Добави поръчка</a>
             @if (Model.HttpContext.User.Identity.IsAuthenticated)
             {
-    <li><a asp-page="/Login" asp-page-handler="Logout">Изход</a></li> }
-                else
-                {
-    <a asp-page="/Register">Регистрация</a>
-                    <a asp-page="/Login">Вход</a>}
+                <li><a asp-page="/Login" asp-page-handler="Logout">Изход</a></li> }
+            else
+            {
+                <a asp-page="/Register">Регистрация</a>
+                <a asp-page="/Login">Вход</a>}
         </div>
     </div>
     </div>
